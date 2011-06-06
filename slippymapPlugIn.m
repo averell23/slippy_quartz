@@ -67,6 +67,8 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 		/*
 		Allocate any permanent resource required by the plug-in.
 		*/
+		self.outputImage = NULL;
+		[[MapImageProvider alloc] init];
 	}
 	
 	return self;
@@ -77,6 +79,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	/*
 	Release any non garbage collected resources created in -init.
 	*/
+	[((MapImageProvider*) self.outputImage) release];
 	
 	[super finalize];
 }
