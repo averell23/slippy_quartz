@@ -67,8 +67,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 		/*
 		Allocate any permanent resource required by the plug-in.
 		*/
-		self.outputImage = NULL;
-		[[MapImageProvider alloc] init];
+		_mapImage = [[MapImageProvider alloc] init];
 	}
 	
 	return self;
@@ -79,7 +78,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	/*
 	Release any non garbage collected resources created in -init.
 	*/
-	[((MapImageProvider*) self.outputImage) release];
+	[_mapImage release];
 	
 	[super finalize];
 }
@@ -163,6 +162,8 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	The OpenGL context for rendering can be accessed and defined for CGL macros using:
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
+	
+	self.outputImage = _mapImage;
 	
 	return YES;
 }

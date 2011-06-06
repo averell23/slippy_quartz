@@ -12,6 +12,7 @@
 
 @interface slippymapPlugIn : QCPlugIn
 {
+	MapImageProvider* _mapImage;
 }
 
 /*
