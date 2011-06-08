@@ -67,7 +67,11 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 		/*
 		Allocate any permanent resource required by the plug-in.
 		*/
-		_mapImage = [[MapImageProvider alloc] init];
+		NSImageRep* tempRep = [NSImageRep imageRepWithContentsOfURL: [NSURL URLWithString: @"http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/5/21/9.png"]];
+		if ([tempRep isKindOfClass:[NSBitmapImageRep class]]) {
+			internImageRepresentation = (NSBitmapImageRep*) tempRep;
+			[internImageRepresentation retain];
+		}
 	}
 	
 	return self;
@@ -78,7 +82,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	/*
 	Release any non garbage collected resources created in -init.
 	*/
-	[_mapImage release];
+	[internImageRepresentation release];
 	
 	[super finalize];
 }
@@ -163,7 +167,12 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
 	
-	self.outputImage = _mapImage;
+	self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
+							    pixelsWide:[internImageRepresentation pixelsWide] pixelsHigh:[internImageRepresentation pixelsHigh] 
+					            baseAddress:[internImageRepresentation bitmapData] 
+					            bytesPerRow:[internImageRepresentation bytesPerRow] 
+							    releaseCallback:NULL releaseContext:NULL 
+							    colorSpace:[[internImageRepresentation colorSpace] CGColorSpace] shouldColorMatch: YES];
 	
 	return YES;
 }
