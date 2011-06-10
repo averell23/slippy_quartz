@@ -18,6 +18,11 @@
 
 @dynamic outputImage;
 
+
+static void OutputImageReleaseCallback(CGLContextObj cgl_ctx, GLuint name, void* context) {
+ // At the moment, the buffer will just remain active while the plugin runs
+}
+
 /*
 Here you need to declare the input / output properties as dynamic as Quartz Composer will handle their implementation
 @dynamic inputFoo, outputBar;
@@ -171,7 +176,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 							    pixelsWide:[internImageRepresentation pixelsWide] pixelsHigh:[internImageRepresentation pixelsHigh] 
 					            baseAddress:[internImageRepresentation bitmapData] 
 					            bytesPerRow:[internImageRepresentation bytesPerRow] 
-							    releaseCallback:NULL releaseContext:NULL 
+							    releaseCallback:(QCPlugInBufferReleaseCallback)OutputImageReleaseCallback releaseContext:NULL 
 							    colorSpace:[[internImageRepresentation colorSpace] CGColorSpace] shouldColorMatch: YES];
 	
 	return YES;

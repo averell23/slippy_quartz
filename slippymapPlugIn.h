@@ -8,7 +8,6 @@
 
 #import <Quartz/Quartz.h>
 #import <AppKit/AppKit.h>
-#include "MapImageProvider.h"
 
 @interface slippymapPlugIn : QCPlugIn
 {
