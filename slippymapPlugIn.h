@@ -8,10 +8,11 @@
 
 #import <Quartz/Quartz.h>
 #import <AppKit/AppKit.h>
+#import "MapRender.h"
 
 @interface slippymapPlugIn : QCPlugIn
 {
-	NSBitmapImageRep* internImageRepresentation;
+	MapRender* mapRender;
 }
 
 /*

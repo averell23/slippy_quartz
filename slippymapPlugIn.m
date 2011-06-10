@@ -72,11 +72,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 		/*
 		Allocate any permanent resource required by the plug-in.
 		*/
-		NSImageRep* tempRep = [NSImageRep imageRepWithContentsOfURL: [NSURL URLWithString: @"http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/5/21/9.png"]];
-		if ([tempRep isKindOfClass:[NSBitmapImageRep class]]) {
-			internImageRepresentation = (NSBitmapImageRep*) tempRep;
-			[internImageRepresentation retain];
-		}
+		mapRender = [[MapRender alloc] init];
 	}
 	
 	return self;
@@ -87,7 +83,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	/*
 	Release any non garbage collected resources created in -init.
 	*/
-	[internImageRepresentation release];
+	[mapRender release];
 	
 	[super finalize];
 }
@@ -171,7 +167,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	The OpenGL context for rendering can be accessed and defined for CGL macros using:
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
-	
+	NSBitmapImageRep* internImageRepresentation = [mapRender imageRep];
 	self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
 							    pixelsWide:[internImageRepresentation pixelsWide] pixelsHigh:[internImageRepresentation pixelsHigh] 
 					            baseAddress:[internImageRepresentation bitmapData] 
