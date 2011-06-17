@@ -16,7 +16,7 @@
 
 @implementation slippymapPlugIn
 
-@dynamic outputImage;
+@dynamic outputImage, inputTileServerUrl;
 
 
 static void OutputImageReleaseCallback(CGLContextObj cgl_ctx, GLuint name, void* context) {
@@ -43,7 +43,16 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	Specify the optional attributes for property based ports (QCPortAttributeNameKey, QCPortAttributeDefaultValueKey...).
 	*/
 	
-	return [NSDictionary dictionaryWithObjectsAndKeys: @"Image", QCPortAttributeNameKey, nil];
+	if([key isEqualToString:@"inputTileServerUrl"]) {
+		return [NSDictionary dictionaryWithObjectsAndKeys: 
+				@"Tile Server URL", QCPortAttributeNameKey, 
+				@"http://tile.openstreetmap.org/", QCPortAttributeDefaultValueKey,
+				nil];
+	}
+	
+	if([key isEqualToString:@"outputImage"]) {
+		return [NSDictionary dictionaryWithObjectsAndKeys: @"Image", QCPortAttributeNameKey, nil];
+	}
 	
 	return nil;
 }
@@ -167,15 +176,19 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	The OpenGL context for rendering can be accessed and defined for CGL macros using:
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
-	NSBitmapImageRep* internImageRepresentation = [mapRender imageRep];
-	self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
+	mapRender.tileServerUrl = self.inputTileServerUrl;
+	if([mapRender reRender]) {
+		NSBitmapImageRep* internImageRepresentation = [mapRender imageRep];
+		self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
 							    pixelsWide:[internImageRepresentation pixelsWide] pixelsHigh:[internImageRepresentation pixelsHigh] 
 					            baseAddress:[internImageRepresentation bitmapData] 
 					            bytesPerRow:[internImageRepresentation bytesPerRow] 
 							    releaseCallback:(QCPlugInBufferReleaseCallback)OutputImageReleaseCallback releaseContext:NULL 
 							    colorSpace:[[internImageRepresentation colorSpace] CGColorSpace] shouldColorMatch: YES];
+		return YES;
+	} 
 	
-	return YES;
+	return NO;
 }
 
 - (void) disableExecution:(id<QCPlugInContext>)context

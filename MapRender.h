@@ -13,8 +13,12 @@
 @interface MapRender : NSObject {
 	NSImage* targetImage;
 	NSMutableArray* tileImages;
+	NSString* tileServerUrl;
 }
 
+@property(assign) NSString* tileServerUrl;
+
 - (NSBitmapImageRep*) imageRep;
+- (BOOL) reRender;
 
 @end
