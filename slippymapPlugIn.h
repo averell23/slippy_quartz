@@ -24,5 +24,6 @@ You can access their values in the appropriate plug-in methods using self.inputF
 
 @property(assign) id<QCPlugInOutputImageProvider> outputImage;
 @property(assign) NSString* inputTileServerUrl;
+@property(assign) NSUInteger inputPixelDimension;
 
 @end

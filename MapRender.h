@@ -14,9 +14,11 @@
 	NSImage* targetImage;
 	NSMutableArray* tileImages;
 	NSString* tileServerUrl;
+	NSUInteger pixelDimension;
 }
 
 @property(assign) NSString* tileServerUrl;
+@property(assign) NSUInteger pixelDimension;
 
 - (NSBitmapImageRep*) imageRep;
 - (BOOL) reRender;

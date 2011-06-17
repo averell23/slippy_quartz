@@ -16,7 +16,7 @@
 
 @implementation slippymapPlugIn
 
-@dynamic outputImage, inputTileServerUrl;
+@dynamic outputImage, inputTileServerUrl, inputPixelDimension;
 
 
 static void OutputImageReleaseCallback(CGLContextObj cgl_ctx, GLuint name, void* context) {
@@ -52,6 +52,15 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	
 	if([key isEqualToString:@"outputImage"]) {
 		return [NSDictionary dictionaryWithObjectsAndKeys: @"Image", QCPortAttributeNameKey, nil];
+	}
+	
+	if([key isEqualToString:@"inputPixelDimension"]) {
+		return [NSDictionary dictionaryWithObjectsAndKeys: 
+				@"Width/Height in Pixels", QCPortAttributeNameKey,
+				[NSNumber numberWithUnsignedInteger:512], QCPortAttributeDefaultValueKey,
+				[NSNumber numberWithUnsignedInteger:4096], QCPortAttributeMaximumValueKey,
+				[NSNumber numberWithUnsignedInteger:256], QCPortAttributeMinimumValueKey,
+				nil];
 	}
 	
 	return nil;
@@ -177,6 +186,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
 	mapRender.tileServerUrl = self.inputTileServerUrl;
+	mapRender.pixelDimension = self.inputPixelDimension;
 	if([mapRender reRender]) {
 		NSBitmapImageRep* internImageRepresentation = [mapRender imageRep];
 		self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 

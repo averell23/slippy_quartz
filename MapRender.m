@@ -12,7 +12,7 @@
 @implementation MapRender
 
 
-@synthesize tileServerUrl;
+@synthesize tileServerUrl, pixelDimension;
 
 - (id) init
 {
@@ -26,15 +26,25 @@
 }
 
 - (BOOL) reRender {
-	[targetImage release];
+	double zoomLevel = ceil(log2(self.pixelDimension / 256.0));
+	double tileRange = exp2(zoomLevel);
 	
-	NSImageRep* tempImageRep1 = [NSImageRep imageRepWithContentsOfURL: [NSURL URLWithString: [self.tileServerUrl stringByAppendingString: @"/1/0/0.png"]]];
-	NSImageRep* tempImageRep2 = [NSImageRep imageRepWithContentsOfURL: [NSURL URLWithString: [self.tileServerUrl stringByAppendingString: @"/1/1/0.png"]]];
-    // NSImageRep* tempImageRep2 = [NSImageRep imageRepWithContentsOfURL: [NSURL URLWithString: @"http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/1/1/0.png"]];
-	targetImage = [[NSImage alloc] initWithSize:NSMakeSize(300.0, 300.0)];
+	[targetImage release];
+	targetImage = [[NSImage alloc] initWithSize:NSMakeSize(self.pixelDimension, self.pixelDimension)];
+	
 	[targetImage lockFocus];
-	[tempImageRep1 drawInRect:NSMakeRect(0, 0, 150.0, 300.0)];
-	[tempImageRep2 drawInRect:NSMakeRect(150.0, 0, 300.0, 300.0)];
+	
+	// for(int x=0 ; x < tileRange ; x++) {
+		// for(int y=0 ; y < tileRange ; y++) {
+	int x = 0;
+	int y = 0;
+			NSString* urlString = [self.tileServerUrl stringByAppendingFormat:@"/%@/%@/%@.png", zoomLevel, x, y];
+			NSURL* currentUrl = [NSURL URLWithString: urlString];
+			NSImageRep* currentImageRep = [NSImageRep imageRepWithContentsOfURL: currentUrl];
+			[currentImageRep drawInRect:NSMakeRect(256*x, 256*y, 256, 256)];
+		// }
+	// }
+	
 	[targetImage unlockFocus];
 	
 	
