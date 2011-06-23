@@ -90,7 +90,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 		/*
 		Allocate any permanent resource required by the plug-in.
 		*/
-		mapRender = [[MapRender alloc] init];
+		mapRenderer = [[MapRenderer alloc] init];
 	}
 	
 	return self;
@@ -101,7 +101,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	/*
 	Release any non garbage collected resources created in -init.
 	*/
-	[mapRender release];
+	[mapRenderer release];
 	
 	[super finalize];
 }
@@ -185,10 +185,10 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	The OpenGL context for rendering can be accessed and defined for CGL macros using:
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
-	mapRender.tileServerUrl = self.inputTileServerUrl;
-	mapRender.pixelDimension = self.inputPixelDimension;
-	if([mapRender reRender]) {
-		NSBitmapImageRep* internImageRepresentation = [mapRender imageRep];
+	mapRenderer.tileServerUrl = self.inputTileServerUrl;
+	mapRenderer.pixelDimension = self.inputPixelDimension;
+	if([mapRenderer reRender]) {
+		NSBitmapImageRep* internImageRepresentation = [mapRenderer imageRep];
 		self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
 							    pixelsWide:[internImageRepresentation pixelsWide] pixelsHigh:[internImageRepresentation pixelsHigh] 
 					            baseAddress:[internImageRepresentation bitmapData] 

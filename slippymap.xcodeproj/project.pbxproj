@@ -24,9 +24,10 @@
 /* Begin PBXBuildFile section */
 		16BA95420A7EB2EB001E4983 /* slippymapPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BA95410A7EB2EB001E4983 /* slippymapPlugIn.m */; };
 		16BA96310A7EB9AC001E4983 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16BA96300A7EB9AC001E4983 /* Quartz.framework */; };
+		651010C813B3D45A0047FB78 /* TileDownloderDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */; };
+		651010FD13B3E0CF0047FB78 /* MapRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651010FC13B3E0CF0047FB78 /* MapRenderer.m */; };
 		7238D5520DB6988600E9A42D /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7238D5500DB6988600E9A42D /* Settings.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		E35A0D9E13A230CC00936BD3 /* MapRender.m in Sources */ = {isa = PBXBuildFile; fileRef = E35A0D9D13A230CC00936BD3 /* MapRender.m */; };
 		E3F7AA72139972B40021C967 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F7AA71139972B40021C967 /* AppKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,11 +47,13 @@
 		16BA95400A7EB2EB001E4983 /* slippymapPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = slippymapPlugIn.h; sourceTree = "<group>"; };
 		16BA95410A7EB2EB001E4983 /* slippymapPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = slippymapPlugIn.m; sourceTree = "<group>"; };
 		16BA96300A7EB9AC001E4983 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = /System/Library/Frameworks/Quartz.framework; sourceTree = "<absolute>"; };
+		651010C613B3D45A0047FB78 /* TileDownloderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileDownloderDelegate.h; path = slippy_quartz/TileDownloderDelegate.h; sourceTree = DEVELOPER_DIR; };
+		651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TileDownloderDelegate.m; path = slippy_quartz/TileDownloderDelegate.m; sourceTree = DEVELOPER_DIR; };
+		651010FB13B3E0CF0047FB78 /* MapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapRenderer.h; path = slippy_quartz/MapRenderer.h; sourceTree = DEVELOPER_DIR; };
+		651010FC13B3E0CF0047FB78 /* MapRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapRenderer.m; path = slippy_quartz/MapRenderer.m; sourceTree = DEVELOPER_DIR; };
 		7238D5510DB6988600E9A42D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Settings.xib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* slippymap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slippymap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E35A0D9C13A230CC00936BD3 /* MapRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapRender.h; path = slippy_quartz/MapRender.h; sourceTree = DEVELOPER_DIR; };
-		E35A0D9D13A230CC00936BD3 /* MapRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapRender.m; path = slippy_quartz/MapRender.m; sourceTree = DEVELOPER_DIR; };
 		E3F7AA71139972B40021C967 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -102,10 +105,12 @@
 		08FB77AFFE84173DC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				651010FB13B3E0CF0047FB78 /* MapRenderer.h */,
+				651010FC13B3E0CF0047FB78 /* MapRenderer.m */,
 				16BA95400A7EB2EB001E4983 /* slippymapPlugIn.h */,
 				16BA95410A7EB2EB001E4983 /* slippymapPlugIn.m */,
-				E35A0D9C13A230CC00936BD3 /* MapRender.h */,
-				E35A0D9D13A230CC00936BD3 /* MapRender.m */,
+				651010C613B3D45A0047FB78 /* TileDownloderDelegate.h */,
+				651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -205,7 +210,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				16BA95420A7EB2EB001E4983 /* slippymapPlugIn.m in Sources */,
-				E35A0D9E13A230CC00936BD3 /* MapRender.m in Sources */,
+				651010C813B3D45A0047FB78 /* TileDownloderDelegate.m in Sources */,
+				651010FD13B3E0CF0047FB78 /* MapRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

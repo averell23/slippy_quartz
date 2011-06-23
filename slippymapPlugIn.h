@@ -8,11 +8,11 @@
 
 #import <Quartz/Quartz.h>
 #import <AppKit/AppKit.h>
-#import "MapRender.h"
+#import "MapRenderer.h"
 
 @interface slippymapPlugIn : QCPlugIn
 {
-	MapRender* mapRender;
+	MapRenderer* mapRenderer;
 }
 
 /*

@@ -1,5 +1,5 @@
 //
-//  MapRender.h
+//  MapRenderer.h
 //  slippymap
 //
 //  Created by Daniel Hahn on 10.06.11.
@@ -10,7 +10,7 @@
 #import <AppKit/AppKit.h>
 
 
-@interface MapRender : NSObject {
+@interface MapRenderer : NSObject {
 	NSImage* targetImage;
 	NSMutableArray* tileImages;
 	NSString* tileServerUrl;

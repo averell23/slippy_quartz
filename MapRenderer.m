@@ -6,10 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "MapRender.h"
+#import "MapRenderer.h"
 
 
-@implementation MapRender
+@implementation MapRenderer
 
 
 @synthesize tileServerUrl, pixelDimension;
@@ -26,7 +26,7 @@
 }
 
 - (BOOL) reRender {
-	double zoomLevel = ceil(log2(self.pixelDimension / 256.0));
+	int zoomLevel = ceil(log2(self.pixelDimension / 256.0));
 	double tileRange = exp2(zoomLevel);
 	
 	[targetImage release];
@@ -34,16 +34,17 @@
 	
 	[targetImage lockFocus];
 	
-	// for(int x=0 ; x < tileRange ; x++) {
-		// for(int y=0 ; y < tileRange ; y++) {
-	int x = 0;
-	int y = 0;
-			NSString* urlString = [self.tileServerUrl stringByAppendingFormat:@"/%@/%@/%@.png", zoomLevel, x, y];
+	// Coordinate system has its origin in the lower left, PS-Style
+	for(int x=0 ; x < tileRange ; x++) {
+		for(int y=0 ; y < tileRange ; y++) {
+			NSString* urlString = [NSString stringWithFormat: @"%@/%d/%d/%d.png", self.tileServerUrl, zoomLevel, x, y];
 			NSURL* currentUrl = [NSURL URLWithString: urlString];
 			NSImageRep* currentImageRep = [NSImageRep imageRepWithContentsOfURL: currentUrl];
-			[currentImageRep drawInRect:NSMakeRect(256*x, 256*y, 256, 256)];
-		// }
-	// }
+			int xpos = x*256;
+			int ypos = self.pixelDimension-((y+1)*256);
+			[currentImageRep drawInRect:NSMakeRect(xpos, ypos, 256, 256)];
+		}
+	}
 	
 	[targetImage unlockFocus];
 	
