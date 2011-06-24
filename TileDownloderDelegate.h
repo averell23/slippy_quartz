@@ -14,7 +14,6 @@
 	NSRect drawingRect;
 	NSMutableData* receivedData;
 	MapRenderer* mapRenderer;
-
 }
 
 - (id)initWithDrawingRect:(NSRect)rect renderer:(MapRenderer*)renderer;

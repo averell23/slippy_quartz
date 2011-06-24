@@ -20,6 +20,7 @@
 @property(assign) NSString* tileServerUrl;
 @property(assign) NSUInteger pixelDimension;
 
+- (void) renderWithDownloadedData:(NSData*)data inRect:(NSRect)rect;
 - (NSBitmapImageRep*) imageRep;
 - (BOOL) reRender;
 
