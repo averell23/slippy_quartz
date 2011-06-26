@@ -13,6 +13,7 @@
 @interface slippymapPlugIn : QCPlugIn
 {
 	MapRenderer* mapRenderer;
+	NSBitmapImageRep* currentImageRep;
 }
 
 /*

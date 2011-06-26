@@ -39,13 +39,12 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	// do something with the data
-    // receivedData is declared as a method instance elsewhere
-    NSLog(@"Succeeded! Received %d bytes of data",[receivedData length]);
+	[mapRenderer renderWithDownloadedData:receivedData inRect:drawingRect];
 	
     // release the connection, and the data object
     [connection release];
     [receivedData release];
+	[self release];
 }
 
 @end

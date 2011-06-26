@@ -12,7 +12,22 @@
 @implementation MapRenderer
 
 
-@synthesize tileServerUrl, pixelDimension;
+@synthesize tileServerUrl, pixelDimension, needsRedraw;
+
+
+- (void)setTileServerUrl:(NSString *)value {
+	if(![tileServerUrl isEqualToString: value]) {
+		tileServerUrl = value;
+		needsRedownload = YES;
+	}
+}
+
+- (void)setPixelDimension:(NSUInteger)value {
+	if(pixelDimension != value) {
+		pixelDimension = value;
+		needsRedownload = YES;
+	}
+}
 
 - (id) init
 {
@@ -20,6 +35,9 @@
 		/*
 		 Allocate any permanent resource required by the plug-in.
 		 */
+		tileServerUrl = @"";
+		pixelDimension = 0;
+		needsRedraw = NO;
 	}
 	
 	return self;
@@ -40,14 +58,14 @@
 	
 }
 
-- (BOOL) reRender {
+- (BOOL) startRedownloadIfNeeded {
+	if(!needsRedownload) return NO;
+	
 	int zoomLevel = ceil(log2(self.pixelDimension / 256.0));
 	double tileRange = exp2(zoomLevel);
 	
 	[targetImage release];
 	targetImage = [[NSImage alloc] initWithSize:NSMakeSize(self.pixelDimension, self.pixelDimension)];
-	
-	[targetImage lockFocus];
 	
 	// Coordinate system has its origin in the lower left, PS-Style
 	for(int x=0 ; x < tileRange ; x++) {
@@ -58,6 +76,9 @@
 		}
 	}
 	
+	self.needsRedraw = NO;
+	needsRedownload = NO;
+	
 	return YES;
 }
 
@@ -66,14 +87,17 @@
 	NSBitmapImageRep* imageRep = [NSBitmapImageRep imageRepWithData:data];
 	[imageRep drawInRect:rect];
 	[targetImage unlockFocus];
+	self.needsRedraw = YES;
 }
 
 
 - (NSBitmapImageRep*) imageRep {
 	NSSize size = [targetImage size];
 	[targetImage lockFocus];
-	NSBitmapImageRep* rep = [[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,size.width,size.height)];
+	NSBitmapImageRep* rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect: NSMakeRect(0,0,size.width,size.height)] autorelease];
 	[targetImage unlockFocus];
+	
+	self.needsRedraw = NO; // Owner got the image, so no redraw needed.
 	
 	return rep;
 }

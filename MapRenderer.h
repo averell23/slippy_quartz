@@ -15,13 +15,16 @@
 	NSMutableArray* tileImages;
 	NSString* tileServerUrl;
 	NSUInteger pixelDimension;
+	BOOL needsRedraw; // Indicates if the plugin needs to re-render the contents (because a tile arrived)
+	BOOL needsRedownload; // Indicates if we need to re-download the tiles, because parameters changed
 }
 
 @property(assign) NSString* tileServerUrl;
 @property(assign) NSUInteger pixelDimension;
+@property(assign) BOOL needsRedraw;
 
 - (void) renderWithDownloadedData:(NSData*)data inRect:(NSRect)rect;
 - (NSBitmapImageRep*) imageRep;
-- (BOOL) reRender;
+- (BOOL) startRedownloadIfNeeded;
 
 @end

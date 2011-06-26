@@ -72,7 +72,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	Return the execution mode of the plug-in: kQCPlugInExecutionModeProvider, kQCPlugInExecutionModeProcessor, or kQCPlugInExecutionModeConsumer.
 	*/
 	
-	return kQCPlugInExecutionModeProcessor;
+	return kQCPlugInExecutionModeProvider;
 }
 
 + (QCPlugInTimeMode) timeMode
@@ -81,7 +81,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	Return the time dependency mode of the plug-in: kQCPlugInTimeModeNone, kQCPlugInTimeModeIdle or kQCPlugInTimeModeTimeBase.
 	*/
 	
-	return kQCPlugInTimeModeNone;
+	return kQCPlugInTimeModeIdle;
 }
 
 - (id) init
@@ -111,7 +111,7 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	/*
 	Release any resources created in -init.
 	*/
-	
+	[currentImageRep release];
 	[super dealloc];
 }
 
@@ -185,18 +185,25 @@ Here you need to declare the input / output properties as dynamic as Quartz Comp
 	The OpenGL context for rendering can be accessed and defined for CGL macros using:
 	CGLContextObj cgl_ctx = [context CGLContextObj];
 	*/
+	// return YES if([mapRenderer.tileServerUrl isEqualToString self.inputTileServerUrl] && mapRenderer.pixelDimension == self.inputPixelD
+	
 	mapRenderer.tileServerUrl = self.inputTileServerUrl;
 	mapRenderer.pixelDimension = self.inputPixelDimension;
-	if([mapRenderer reRender]) {
-		NSBitmapImageRep* internImageRepresentation = [mapRenderer imageRep];
-		self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
-							    pixelsWide:[internImageRepresentation pixelsWide] pixelsHigh:[internImageRepresentation pixelsHigh] 
-					            baseAddress:[internImageRepresentation bitmapData] 
-					            bytesPerRow:[internImageRepresentation bytesPerRow] 
-							    releaseCallback:(QCPlugInBufferReleaseCallback)OutputImageReleaseCallback releaseContext:NULL 
-							    colorSpace:[[internImageRepresentation colorSpace] CGColorSpace] shouldColorMatch: YES];
-		return YES;
+	[mapRenderer startRedownloadIfNeeded];
+	if(mapRenderer.needsRedraw) {
+		[currentImageRep release];
+		currentImageRep = [[mapRenderer imageRep] retain];
 	} 
+	
+	if(currentImageRep != NULL) {
+		self.outputImage = [context outputImageProviderFromBufferWithPixelFormat:QCPlugInPixelFormatARGB8 
+																		 pixelsWide:[currentImageRep pixelsWide] pixelsHigh:[currentImageRep pixelsHigh] 
+																		baseAddress:[currentImageRep bitmapData] 
+																		bytesPerRow:[currentImageRep bytesPerRow] 
+																	releaseCallback:(QCPlugInBufferReleaseCallback)OutputImageReleaseCallback releaseContext:NULL 
+																		 colorSpace:[[currentImageRep colorSpace] CGColorSpace] shouldColorMatch: YES];
+		return YES;
+	}
 	
 	return NO;
 }
