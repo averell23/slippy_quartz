@@ -28,6 +28,7 @@
 		651010FD13B3E0CF0047FB78 /* MapRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651010FC13B3E0CF0047FB78 /* MapRenderer.m */; };
 		7238D5520DB6988600E9A42D /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7238D5500DB6988600E9A42D /* Settings.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
+		E3321D6813BE248200A1B86B /* calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = E3321D6713BE248200A1B86B /* calculations.c */; };
 		E3F7AA72139972B40021C967 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F7AA71139972B40021C967 /* AppKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,8 @@
 		7238D5510DB6988600E9A42D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Settings.xib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* slippymap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slippymap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3321D6613BE248200A1B86B /* calculations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = calculations.h; path = slippy_quartz/calculations.h; sourceTree = DEVELOPER_DIR; };
+		E3321D6713BE248200A1B86B /* calculations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = calculations.c; path = slippy_quartz/calculations.c; sourceTree = DEVELOPER_DIR; };
 		E3F7AA71139972B40021C967 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -127,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				16AA5C440A7EEE7300888E31 /* slippymap_Prefix.pch */,
+				E3321D6613BE248200A1B86B /* calculations.h */,
+				E3321D6713BE248200A1B86B /* calculations.c */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				16BA95420A7EB2EB001E4983 /* slippymapPlugIn.m in Sources */,
 				651010C813B3D45A0047FB78 /* TileDownloderDelegate.m in Sources */,
 				651010FD13B3E0CF0047FB78 /* MapRenderer.m in Sources */,
+				E3321D6813BE248200A1B86B /* calculations.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
