@@ -11,6 +11,12 @@ typedef struct {
 	double lon;
 } coordinate;
 
+// Circumference of the earth along the equator (approx)
+#define EQUATOR_CIRCUMFERENCE 40000.0
+
+// Each tile is expected to be TILE_SIZExTILE_SIZE pixel
+#define TILE_SIZE 256
+
 /*
  * Computes the target coordinate that you will reach when you go for a distance from
  * the start point, following a given initial trueCourse.
@@ -46,3 +52,13 @@ double tilex2long(int x, int zoom_level);
 
 // Convert an y tile number from OSM to latitude
 double tiley2lat(int y, int zoom_level);
+
+// Return the resolution in pixel/km
+double resolution(int pixel, double kilometers);
+
+// Returns the best zoom level for a given resolution
+int zoomLevel_res(double resolution);
+
+// Returns the best zoom level for a given area side length,
+// to be rendered into the given amount of pixesl
+int zoomLevel(int pixel, double kilometers);

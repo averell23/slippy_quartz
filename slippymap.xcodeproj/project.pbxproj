@@ -52,6 +52,8 @@
 		651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TileDownloderDelegate.m; path = slippy_quartz/TileDownloderDelegate.m; sourceTree = DEVELOPER_DIR; };
 		651010FB13B3E0CF0047FB78 /* MapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapRenderer.h; path = slippy_quartz/MapRenderer.h; sourceTree = DEVELOPER_DIR; };
 		651010FC13B3E0CF0047FB78 /* MapRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapRenderer.m; path = slippy_quartz/MapRenderer.m; sourceTree = DEVELOPER_DIR; };
+		65E022CD13D2EFF000B59755 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Tests.octest; path = slippy_quartz/build/Debug/Tests.octest; sourceTree = DEVELOPER_DIR; };
+		65E022CE13D2EFF000B59755 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tests-Info.plist"; path = "slippy_quartz/Tests-Info.plist"; sourceTree = DEVELOPER_DIR; };
 		7238D5510DB6988600E9A42D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Settings.xib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* slippymap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slippymap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +63,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		65E022CA13D2EFF000B59755 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D5B49B3048680CD000E48DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -82,6 +91,7 @@
 				089C167CFE841241C02AAC07 /* Resources */,
 				089C1671FE841209C02AAC07 /* Frameworks */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
+				65E022CE13D2EFF000B59755 /* Tests-Info.plist */,
 			);
 			name = "Quartz Composer Plug In";
 			sourceTree = "<group>";
@@ -122,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				8D5B49B6048680CD000E48DA /* slippymap.plugin */,
+				65E022CD13D2EFF000B59755 /* Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +150,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		65E022CC13D2EFF000B59755 /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65E022D113D2EFF300B59755 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				65E022C813D2EFF000B59755 /* Resources */,
+				65E022C913D2EFF000B59755 /* Sources */,
+				65E022CA13D2EFF000B59755 /* Frameworks */,
+				65E022CB13D2EFF000B59755 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 65E022CD13D2EFF000B59755 /* Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D5B49AC048680CD000E48DA /* slippymap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "slippymap" */;
@@ -178,11 +207,19 @@
 			targets = (
 				8D5B49AC048680CD000E48DA /* slippymap */,
 				233E2C640A83C768005A62DF /* Build & Copy */,
+				65E022CC13D2EFF000B59755 /* Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		65E022C813D2EFF000B59755 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D5B49AF048680CD000E48DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -207,9 +244,29 @@
 			shellPath = /bin/sh;
 			shellScript = "# This shell script simply copies the built plug-in to \"~/Library/Graphics/Quartz Composer Plug-Ins\" and overrides any previous version at that location\n\nmkdir -p \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins\"\nrm -rf \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/slippymap.plugin\"\ncp -rf \"$BUILT_PRODUCTS_DIR/slippymap.plugin\" \"$USER_LIBRARY_DIR/Graphics/Quartz Composer Plug-Ins/\"\n";
 		};
+		65E022CB13D2EFF000B59755 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		65E022C913D2EFF000B59755 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D5B49B1048680CD000E48DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,6 +371,60 @@
 			};
 			name = Release;
 		};
+		65E022CF13D2EFF300B59755 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		65E022D013D2EFF300B59755 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Tests;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -340,6 +451,15 @@
 			buildConfigurations = (
 				233E2D8A0A83C7AC005A62DF /* Debug */,
 				233E2D8B0A83C7AC005A62DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65E022D113D2EFF300B59755 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65E022CF13D2EFF300B59755 /* Debug */,
+				65E022D013D2EFF300B59755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

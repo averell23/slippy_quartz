@@ -54,3 +54,16 @@ double tiley2lat(int y, int zoom_level)
 	double n = M_PI - 2.0 * M_PI * y / pow(2.0, zoom_level);
 	return 180.0 / M_PI * atan(0.5 * (exp(n) - exp(-n)));
 }
+
+double resolution(int pixel, double kilometers) {
+	return (float) pixel / kilometers;
+}
+
+int zoomLevel_res(double resolution) {
+	double exact_zoom = log2((resolution * EQUATOR_CIRCUMFERENCE) / TILE_SIZE);
+	return floor(exact_zoom);
+}
+
+int zoomLevel(int pixel, double kilometers) {
+	return zoomLevel_res(resolution(pixel, kilometers));
+}
