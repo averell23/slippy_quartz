@@ -52,7 +52,7 @@
 		651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TileDownloderDelegate.m; path = slippy_quartz/TileDownloderDelegate.m; sourceTree = DEVELOPER_DIR; };
 		651010FB13B3E0CF0047FB78 /* MapRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapRenderer.h; path = slippy_quartz/MapRenderer.h; sourceTree = DEVELOPER_DIR; };
 		651010FC13B3E0CF0047FB78 /* MapRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapRenderer.m; path = slippy_quartz/MapRenderer.m; sourceTree = DEVELOPER_DIR; };
-		65E022CD13D2EFF000B59755 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Tests.octest; path = slippy_quartz/build/Debug/Tests.octest; sourceTree = DEVELOPER_DIR; };
+		65E022CD13D2EFF000B59755 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E022CE13D2EFF000B59755 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tests-Info.plist"; path = "slippy_quartz/Tests-Info.plist"; sourceTree = DEVELOPER_DIR; };
 		7238D5510DB6988600E9A42D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Settings.xib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* slippymap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slippymap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };

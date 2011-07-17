@@ -29,36 +29,36 @@ coordinate target_coordinate(coordinate start_point, double distance, double tru
  * Convert a given distance in meters to radians.
  * See http://williams.best.vwh.net/avform.htm
  */
-double distance_to_radians(double meters);
+double calc_distance_to_radians(double meters);
 
 // Convert a given distance in radians to meters
-double distance_to_meters(double radians);
+double calc_distance_to_meters(double radians);
 
 // Convert from radians to degrees
-double deg(double radians);
+double calc_deg(double radians);
 
 // Convert from degrees to radians
-double rad(double degrees);
+double calc_rad(double degrees);
 
 // Convert longitude (in rad) to an x tile number for OSM.
 // See http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
-int long2tilex(double lon, int zoom_level);
+int calc_long2tilex(double lon, int zoom_level);
 
 // Convert latitude to an y tile number for OSM
-int lat2tiley(double lat, int zoom_level);
+int calc_lat2tiley(double lat, int zoom_level);
 
 // Convert an x tile number from OSM to longitude
-double tilex2long(int x, int zoom_level);
+double calc_tilex2long(int x, int zoom_level);
 
 // Convert an y tile number from OSM to latitude
-double tiley2lat(int y, int zoom_level);
+double calc_tiley2lat(int y, int zoom_level);
 
 // Return the resolution in pixel/km
-double resolution(int pixel, double kilometers);
+double calc_resolution(int pixel, double kilometers);
 
 // Returns the best zoom level for a given resolution
-int zoomLevel_res(double resolution);
+int calc_zoomLevel_res(double resolution);
 
 // Returns the best zoom level for a given area side length,
 // to be rendered into the given amount of pixesl
-int zoomLevel(int pixel, double kilometers);
+int calc_zoomLevel(int pixel, double kilometers);

@@ -8,11 +8,12 @@
 
 #import "MapRenderer.h"
 #import "TileDownloderDelegate.h"
+#include "calculations.h"
 
 @implementation MapRenderer
 
 
-@synthesize tileServerUrl, pixelDimension, needsRedraw;
+@synthesize tileServerUrl, pixelDimension, needsRedraw, lat, lon;
 
 
 - (void)setTileServerUrl:(NSString *)value {
@@ -38,6 +39,8 @@
 		tileServerUrl = @"";
 		pixelDimension = 0;
 		needsRedraw = NO;
+		lat = 52.500556; 
+		lon = 13.398889;
 	}
 	
 	return self;
@@ -61,18 +64,19 @@
 - (BOOL) startRedownloadIfNeeded {
 	if(!needsRedownload) return NO;
 	
-	int zoomLevel = ceil(log2(self.pixelDimension / 256.0));
-	double tileRange = exp2(zoomLevel);
+	int zoomLevel = 10; // ceil(log2(self.pixelDimension / 256.0));
+	int tileXVal = calc_long2tilex(lon, zoomLevel);
+	int tileYVal = calc_lat2tiley(lat, zoomLevel);
 	
 	[targetImage release];
-	targetImage = [[NSImage alloc] initWithSize:NSMakeSize(self.pixelDimension, self.pixelDimension)];
+	targetImage = [[NSImage alloc] initWithSize:NSMakeSize(768, 768)];
 	
 	// Coordinate system has its origin in the lower left, PS-Style
-	for(int x=0 ; x < tileRange ; x++) {
-		for(int y=0 ; y < tileRange ; y++) {
+	for(int x=0 ; x < 3 ; x++) {
+		for(int y=0 ; y < 3; y++) {
 			int xpos = x*256;
-			int ypos = self.pixelDimension-((y+1)*256);
-			[self initializeTileDownloadWithZoomLevel:zoomLevel xPosition:x yPosition:y drawingRect:NSMakeRect(xpos, ypos, 256, 256)];
+			int ypos = 768-((y+1)*256);
+			[self initializeTileDownloadWithZoomLevel:zoomLevel xPosition:(tileXVal - 1 + x) yPosition:(tileYVal - 1 + y) drawingRect:NSMakeRect(xpos, ypos, 256, 256)];
 		}
 	}
 	
