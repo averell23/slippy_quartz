@@ -8,7 +8,7 @@
 
 #import "MapRenderer.h"
 #import "TileDownloderDelegate.h"
-#include "calculations.h"
+#import "GeoPoint.h"
 
 @implementation MapRenderer
 
@@ -65,8 +65,8 @@
 	if(!needsRedownload) return NO;
 	
 	int zoomLevel = 10; // ceil(log2(self.pixelDimension / 256.0));
-	int tileXVal = calc_long2tilex(lon, zoomLevel);
-	int tileYVal = calc_lat2tiley(lat, zoomLevel);
+	
+	GeoPoint* pt = [[GeoPoint alloc] initWithLat:lat lon:lon];
 	
 	[targetImage release];
 	targetImage = [[NSImage alloc] initWithSize:NSMakeSize(768, 768)];
@@ -76,9 +76,11 @@
 		for(int y=0 ; y < 3; y++) {
 			int xpos = x*256;
 			int ypos = 768-((y+1)*256);
-			[self initializeTileDownloadWithZoomLevel:zoomLevel xPosition:(tileXVal - 1 + x) yPosition:(tileYVal - 1 + y) drawingRect:NSMakeRect(xpos, ypos, 256, 256)];
+			[self initializeTileDownloadWithZoomLevel:zoomLevel xPosition:([pt xTileWithZoomLevel:zoomLevel]  - 1 + x) yPosition:([pt yTileWithZoomLevel:zoomLevel] - 1 + y) drawingRect:NSMakeRect(xpos, ypos, 256, 256)];
 		}
 	}
+	
+	[pt release];
 	
 	self.needsRedraw = NO;
 	needsRedownload = NO;

@@ -26,6 +26,7 @@
 		16BA96310A7EB9AC001E4983 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16BA96300A7EB9AC001E4983 /* Quartz.framework */; };
 		651010C813B3D45A0047FB78 /* TileDownloderDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */; };
 		651010FD13B3E0CF0047FB78 /* MapRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 651010FC13B3E0CF0047FB78 /* MapRenderer.m */; };
+		65E0247A13D3266B00B59755 /* GeoPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E0247913D3266B00B59755 /* GeoPoint.m */; };
 		7238D5520DB6988600E9A42D /* Settings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7238D5500DB6988600E9A42D /* Settings.xib */; };
 		8D5B49B4048680CD000E48DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
 		E3321D6813BE248200A1B86B /* calculations.c in Sources */ = {isa = PBXBuildFile; fileRef = E3321D6713BE248200A1B86B /* calculations.c */; };
@@ -54,6 +55,10 @@
 		651010FC13B3E0CF0047FB78 /* MapRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapRenderer.m; path = slippy_quartz/MapRenderer.m; sourceTree = DEVELOPER_DIR; };
 		65E022CD13D2EFF000B59755 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65E022CE13D2EFF000B59755 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tests-Info.plist"; path = "slippy_quartz/Tests-Info.plist"; sourceTree = DEVELOPER_DIR; };
+		65E0247213D3162300B59755 /* MapRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapRegion.h; path = slippy_quartz/MapRegion.h; sourceTree = DEVELOPER_DIR; };
+		65E0247313D3162300B59755 /* MapRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapRegion.m; path = slippy_quartz/MapRegion.m; sourceTree = DEVELOPER_DIR; };
+		65E0247813D3266B00B59755 /* GeoPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeoPoint.h; path = slippy_quartz/GeoPoint.h; sourceTree = DEVELOPER_DIR; };
+		65E0247913D3266B00B59755 /* GeoPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GeoPoint.m; path = slippy_quartz/GeoPoint.m; sourceTree = DEVELOPER_DIR; };
 		7238D5510DB6988600E9A42D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Settings.xib; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* slippymap.plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slippymap.plugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +129,10 @@
 				16BA95410A7EB2EB001E4983 /* slippymapPlugIn.m */,
 				651010C613B3D45A0047FB78 /* TileDownloderDelegate.h */,
 				651010C713B3D45A0047FB78 /* TileDownloderDelegate.m */,
+				65E0247213D3162300B59755 /* MapRegion.h */,
+				65E0247313D3162300B59755 /* MapRegion.m */,
+				65E0247813D3266B00B59755 /* GeoPoint.h */,
+				65E0247913D3266B00B59755 /* GeoPoint.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -275,6 +284,7 @@
 				651010C813B3D45A0047FB78 /* TileDownloderDelegate.m in Sources */,
 				651010FD13B3E0CF0047FB78 /* MapRenderer.m in Sources */,
 				E3321D6813BE248200A1B86B /* calculations.c in Sources */,
+				65E0247A13D3266B00B59755 /* GeoPoint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
